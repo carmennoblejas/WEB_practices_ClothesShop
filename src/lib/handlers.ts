@@ -8,6 +8,41 @@ export interface GetProductsResponse {
   products: (Product & { _id: Types.ObjectId })[]
 }
 
+export async function getProducts(): Promise<GetProductsResponse> {
+await connect()
+
+const productsProjection = {
+  __v: false
+}
+
+const products = await Products.find({}, productsProjection)
+
+return {
+  products,
+  }
+}
+
+export async function getProduct(
+  productId: Types.ObjectId | string
+  ): Promise<GetProductResponse | null> {
+
+    await connect()
+    const productProjection = {
+    name: true,
+    description: true,
+    img: true,
+    price: true,
+  }
+
+  const product = await Products.findById(productId, productProjection)
+  return product
+}
+
+export interface GetProductResponse
+  extends Pick<Product, 'name' | 'description' | 'img' | 'price'> {
+  _id: Types.ObjectId
+}
+
 export interface ErrorResponse {
   error: string
   message: string
@@ -39,19 +74,7 @@ export async function getUser(
   return user
 }
 
-export async function getProducts(): Promise<GetProductsResponse> {
-await connect()
 
-const productsProjection = {
-  __v: false
-}
-
-const products = await Products.find({}, productsProjection)
-
-return {
-  products,
-  }
-}
 
 export async function createUser(user: {
   email: string;
