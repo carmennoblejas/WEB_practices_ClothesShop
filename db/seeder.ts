@@ -25,18 +25,6 @@ throw new Error('Could not connect');
 
 await conn.connection.db.dropDatabase();
 // Do things here.
-/*const retrievedUsers = await Users.find();
-console.log(JSON.stringify(retrievedUsers, null, 2));
-
-const retrievedUserById = await Users.findById('6509cbf41f4159bd52089aa8');
-console.log(JSON.stringify(retrievedUserById, null, 2));
-
-const deletedUser = await Users.deleteOne({ email: 'johndoe@example.com' });
-console.log(JSON.stringify(deletedUser, null, 2));
-
-const retrievedUsersByCriteria = await Users.find({
-  email: 'johndoe@example.com',
-});*/
 const products: Product[] = [
 {
   name: 'Earthen Bottle',
@@ -81,24 +69,6 @@ console.log(JSON.stringify(retrievedUser, null, 2));
 const res = await Users.create(user);
 console.log(JSON.stringify(res, null, 2));
 
-
-
-
-/*const retrievedUserByCriteria = await Users.findOne({
-email: 'johndoe@example.com',
-});
-console.log(JSON.stringify(retrievedUserByCriteria, null, 2));
-
-retrievedUserByCriteria.name = 'Foo';
-await retrievedUserByCriteria.save();
-
-const retrievedNewUserByCriteria = await Users.findOne({
-email: 'johndoe@example.com',
-});
-
-
-//console.log(JSON.stringify(res, null, 2));
-console.log(JSON.stringify(retrievedNewUserByCriteria, null, 2));*/
 await conn.disconnect();
 
 }
