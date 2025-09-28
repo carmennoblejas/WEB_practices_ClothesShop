@@ -1,6 +1,6 @@
 import { Types } from 'mongoose'
 import { NextRequest, NextResponse } from 'next/server'
-import { ErrorResponse, getUser, GetUserResponse, createUser, CreateUserResponse } from '@/lib/handlers'
+import { ErrorResponse, getUser, GetUserResponse } from '@/lib/handlers'
 import { create } from 'domain'
 
 export async function GET(

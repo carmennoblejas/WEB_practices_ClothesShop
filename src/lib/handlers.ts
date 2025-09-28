@@ -4,6 +4,7 @@ import Users, { User, CartItem } from '@/models/User'
 import connect from '@/lib/mongoose'
 import { Types } from 'mongoose';
 
+
 export interface GetProductsResponse {
   products: (Product & { _id: Types.ObjectId })[]
 }
@@ -104,4 +105,28 @@ export async function createUser(user: {
   return {
     _id: newUser._id,
   };
+}
+
+export interface GetUserCartResponse {
+  cartItems: (Omit<CartItem, 'product'> &{
+    product: Product;
+  })[]; 
+}
+
+export async function getUserCart(
+  userId: Types.ObjectId | string
+): Promise<GetUserCartResponse | null> {
+  await connect();
+  const user = await Users.findById(userId).populate<{
+    cartItems: {
+      product: Product;
+      qty: number;
+    }[];
+  }>('cartItems.product');
+
+  if(!user) {
+    return null;
+  }
+
+  return { cartItems: user.cartItems};
 }
