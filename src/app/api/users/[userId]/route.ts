@@ -1,6 +1,7 @@
 import { Types } from 'mongoose'
 import { NextRequest, NextResponse } from 'next/server'
 import { ErrorResponse, getUser, GetUserResponse } from '@/lib/handlers'
+import { create } from 'domain'
 
 export async function GET(
   request: NextRequest,
@@ -34,3 +35,4 @@ export async function GET(
 
   return NextResponse.json(user)
 }
+

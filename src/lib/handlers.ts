@@ -4,8 +4,44 @@ import Users, { User, CartItem } from '@/models/User'
 import connect from '@/lib/mongoose'
 import { Types } from 'mongoose';
 
+
 export interface GetProductsResponse {
   products: (Product & { _id: Types.ObjectId })[]
+}
+
+export async function getProducts(): Promise<GetProductsResponse> {
+await connect()
+
+const productsProjection = {
+  __v: false
+}
+
+const products = await Products.find({}, productsProjection)
+
+return {
+  products,
+  }
+}
+
+export async function getProduct(
+  productId: Types.ObjectId | string
+  ): Promise<GetProductResponse | null> {
+
+    await connect()
+    const productProjection = {
+    name: true,
+    description: true,
+    img: true,
+    price: true,
+  }
+
+  const product = await Products.findById(productId, productProjection)
+  return product
+}
+
+export interface GetProductResponse
+  extends Pick<Product, 'name' | 'description' | 'img' | 'price'> {
+  _id: Types.ObjectId
 }
 
 export interface ErrorResponse {
@@ -39,19 +75,7 @@ export async function getUser(
   return user
 }
 
-export async function getProducts(): Promise<GetProductsResponse> {
-await connect()
 
-const productsProjection = {
-  __v: false
-}
-
-const products = await Products.find({}, productsProjection)
-
-return {
-  products,
-  }
-}
 
 export async function createUser(user: {
   email: string;
@@ -81,4 +105,28 @@ export async function createUser(user: {
   return {
     _id: newUser._id,
   };
+}
+
+export interface GetUserCartResponse {
+  cartItems: (Omit<CartItem, 'product'> &{
+    product: Product;
+  })[]; 
+}
+
+export async function getUserCart(
+  userId: Types.ObjectId | string
+): Promise<GetUserCartResponse | null> {
+  await connect();
+  const user = await Users.findById(userId).populate<{
+    cartItems: {
+      product: Product;
+      qty: number;
+    }[];
+  }>('cartItems.product');
+
+  if(!user) {
+    return null;
+  }
+
+  return { cartItems: user.cartItems};
 }
