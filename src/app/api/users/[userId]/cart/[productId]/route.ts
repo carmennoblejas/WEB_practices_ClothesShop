@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Users from '@/models/User';
 import {
+  deleteCartItem,
   GetUserCartResponse,
   ErrorResponse,
 } from '@/lib/handlers';
@@ -92,4 +93,70 @@ export async function PUT(
     }
   );
 }
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { userId: string; productId: string } }
+): Promise<NextResponse<GetUserCartResponse | ErrorResponse>> {
+  const { userId, productId } = params;
+
+  // Validate userId and productId
+  if (!Types.ObjectId.isValid(userId) || !Types.ObjectId.isValid(productId)) {
+    return NextResponse.json(
+      {
+        error: 'WRONG_PARAMS',
+        message: 'Invalid user ID or product ID.',
+      },
+      { status: 400 }
+    );
+  }
+
+  // Find user by userId
+  const user = await Users.findById(userId);
+  if (!user) {
+    return NextResponse.json(
+      {
+        error: 'NOT_FOUND',
+        message: 'User not found.',
+      },
+      { status: 404 }
+    );
+  }
+
+  // Check if the product exists in the cart
+  const cartItemIndex = user.cartItems.findIndex(
+    (item) => item.product.toString() === productId
+  );
+
+  if (cartItemIndex === -1) {
+    // Product not found in user's cart
+    return NextResponse.json(
+      {
+        error: 'NOT_FOUND',
+        message: 'Product not found in cart.',
+      },
+      { status: 404 }
+    );
+  }
+
+  // Remove the product from the cart
+  user.cartItems.splice(cartItemIndex, 1);
+  await user.save();
+
+  // Call handler to update cart data if necessary
+  const cart = await deleteCartItem(userId, productId);
+
+  if (cart === null) {
+    return NextResponse.json(
+      {
+        error: 'NOT_FOUND',
+        message: 'User or product not found.',
+      },
+      { status: 404 }
+    );
+  }
+
+  return NextResponse.json(cart);
+}
+
 
