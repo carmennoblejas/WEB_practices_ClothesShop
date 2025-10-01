@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import Users, { User } from '@/models/User';
 import Products, { Product } from '@/models/Product';
+import Orders, { Order } from '@/models/Order';
 
 
 dotenv.config({ path: `.env.local`, override: true });
@@ -68,6 +69,30 @@ console.log(JSON.stringify(retrievedUser, null, 2));
 
 const res = await Users.create(user);
 console.log(JSON.stringify(res, null, 2));
+
+const order: Order = {
+  userId: res._id,
+  orderItems: [
+    {
+      product: insertedProducts[0]._id,
+      qty:2,
+      price: insertedProducts[0].price,
+    },
+    {
+      product: insertedProducts[1]._id,
+      qty:5,
+      price: insertedProducts[1].price,
+    },
+  ],
+address: res.address,
+date: new Date(1-10-2025),
+cardHolder: 'John Doe',
+cardNumber: '12345678',
+};
+
+const createdOrders = await Orders.insertMany(order)
+res.orders = createdOrders.map((order) => order._id)
+await res.save()
 
 await conn.disconnect();
 

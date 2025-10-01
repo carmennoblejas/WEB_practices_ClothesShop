@@ -60,7 +60,7 @@ export async function PUT(
   let newItem = false;
 
   if (existingCartItemIndex === -1){
-    // Product not in cart, add it
+    // Product not in cart, adding it
     user.cartItems.push({
       product: new Types.ObjectId(productId),
       qty: qty,
@@ -70,16 +70,16 @@ export async function PUT(
     user.cartItems[existingCartItemIndex].qty = qty;
   }
 
-  // Save user changes
+
   await user.save();
 
-  // Populate cart
+
   await user.populate({
     path: 'cartItems.product',
     select: 'name price img description',
   });
 
-  //Return updated cart
+  
   return NextResponse.json(
     { cartItems: user.cartItems as unknown as GetUserCartResponse['cartItems'], newItem},
     {
@@ -92,3 +92,4 @@ export async function PUT(
     }
   );
 }
+

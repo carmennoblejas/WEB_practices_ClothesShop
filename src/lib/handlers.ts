@@ -130,3 +130,4 @@ export async function getUserCart(
 
   return { cartItems: user.cartItems};
 }
+
