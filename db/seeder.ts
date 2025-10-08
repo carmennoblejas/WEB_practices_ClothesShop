@@ -87,7 +87,7 @@ const order: Order = {
 address: res.address,
 date: new Date(1-10-2025),
 cardHolder: 'John Doe',
-cardNumber: '12345678',
+cardNumber: '0123456789',
 };
 
 const createdOrders = await Orders.insertMany(order)
