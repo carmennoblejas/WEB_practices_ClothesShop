@@ -1,3 +1,4 @@
+
 import { NextRequest, NextResponse } from "next/server";
 import Users from '@/models/User';
 import {
@@ -68,7 +69,7 @@ export async function PUT(
     });
     newItem = true; // Mark it
   } else {
-    user.cartItems[existingCartItemIndex].qty = qty;
+    user.cartItems[existingCartItemIndex].qty += qty;
   }
 
 
