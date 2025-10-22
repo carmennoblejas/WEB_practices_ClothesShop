@@ -1,5 +1,7 @@
+
 import { NextRequest, NextResponse } from "next/server";
 import Users from '@/models/User';
+import Products from '@/models/Product';
 import {
   deleteCartItem,
   GetUserCartResponse,
@@ -42,11 +44,12 @@ export async function PUT(
 
   // Check if the user exists
   const user = await Users.findById(userId);
-  if (!user) {
+  const product = await Products.findById(productId);
+  if (!user || !product) {
     return NextResponse.json(
       {
         error: 'NOT_FOUND',
-        message: 'User not found.',
+        message: 'User not found or product not found.',
       },
       { status: 404 }
     );
@@ -68,7 +71,7 @@ export async function PUT(
     });
     newItem = true; // Mark it
   } else {
-    user.cartItems[existingCartItemIndex].qty = qty;
+    user.cartItems[existingCartItemIndex].qty += qty;
   }
 
 

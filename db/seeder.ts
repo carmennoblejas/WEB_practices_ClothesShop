@@ -28,16 +28,16 @@ await conn.connection.db.dropDatabase();
 // Do things here.
 const products: Product[] = [
 {
-  name: 'Earthen Bottle',
-  price: 39.95,
+  name: 'Orange Birkin 25',
+  price: 5999.95,
   img: '/img/ecommerce-images/image-card-01.jpg',
-  description: 'What a bottle!',
+  description: 'Ideal everyday bag for autumn',
 },
 {
-  name: 'Nomad Tumbler',
-  price: 39.95,
+  name: 'Lady Dior',
+  price: 2449.95,
   img: '/img/ecommerce-images/image-card-02.jpg',
-  description: 'Yet another item',
+  description: 'Classy small bag for all type of events',
 },
 ];
 const insertedProducts = await Products.insertMany(products);
@@ -87,7 +87,7 @@ const order: Order = {
 address: res.address,
 date: new Date(1-10-2025),
 cardHolder: 'John Doe',
-cardNumber: '12345678',
+cardNumber: '0123456789',
 };
 
 const createdOrders = await Orders.insertMany(order)
