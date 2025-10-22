@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GetUserOrdersResponse, getUserOrders, createOrder, CreateOrderResponse, ErrorResponse } from "@/lib/handlers";
 import { Types } from "mongoose";
+import { getSession } from "@/lib/auth";
 
 export async function GET(
   request: NextRequest,
@@ -8,6 +9,28 @@ export async function GET(
 ): Promise<NextResponse<GetUserOrdersResponse | ErrorResponse>> {
   const { userId } = params;
 
+  // Authentication
+  const session = await getSession();
+  if (!session?.userId) {
+    return NextResponse.json(
+      {
+        error: 'NOT_AUTHENTICATED',
+        message: 'Authentication required.',
+      },
+      { status: 401 }
+    );
+  }
+
+  // Authorization
+  if (session.userId !== userId) {
+    return NextResponse.json(
+      {
+        error: 'NOT_AUTHORIZED',
+        message: 'Unauthorized access.',
+      },
+      { status: 403 }
+    );
+  }
 
   // Validate userId
   if (!Types.ObjectId.isValid(userId)) {
@@ -41,6 +64,28 @@ export async function POST(
 ): Promise<NextResponse<CreateOrderResponse | ErrorResponse>> {
   const { userId } = params;
 
+// Authentication
+  const session = await getSession();
+  if (!session?.userId) {
+    return NextResponse.json(
+      {
+        error: 'NOT_AUTHENTICATED',
+        message: 'Authentication required.',
+      },
+      { status: 401 }
+    );
+  }
+
+  // Authorization
+  if (session.userId !== userId) {
+    return NextResponse.json(
+      {
+        error: 'NOT_AUTHORIZED',
+        message: 'Unauthorized access.',
+      },
+      { status: 403 }
+    );
+  }
 
 
   // Validate userId

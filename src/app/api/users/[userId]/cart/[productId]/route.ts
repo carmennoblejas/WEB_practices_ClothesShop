@@ -8,7 +8,7 @@ import {
   ErrorResponse,
 } from '@/lib/handlers';
 import { Types } from 'mongoose';
-
+import { getSession } from "@/lib/auth";
 
 export async function PUT(
   request: NextRequest,
@@ -16,6 +16,28 @@ export async function PUT(
 ): Promise<NextResponse<GetUserCartResponse | ErrorResponse>> {
   const { userId, productId } = params;
 
+// Authentication
+const session = await getSession();
+if (!session?.userId) {
+  return NextResponse.json(
+    {
+      error: 'NOT_AUTHENTICATED',
+      message: 'Authentication required.',
+    },
+    { status: 401 }
+  );
+}
+
+// Authorization
+if (session.userId !== userId) {
+  return NextResponse.json(
+    {
+      error: 'NOT_AUTHORIZED',
+      message: 'Unauthorized access.',
+    },
+    { status: 403 }
+  );
+}
 
   // Validate userId and productId
   if (!Types.ObjectId.isValid(userId) || !Types.ObjectId.isValid(productId)) {
@@ -102,6 +124,30 @@ export async function DELETE(
   { params }: { params: { userId: string; productId: string } }
 ): Promise<NextResponse<GetUserCartResponse | ErrorResponse>> {
   const { userId, productId } = params;
+
+// Authentication
+  const session = await getSession();
+  if (!session?.userId) {
+    return NextResponse.json(
+      {
+        error: 'NOT_AUTHENTICATED',
+        message: 'Authentication required.',
+      },
+      { status: 401 }
+    );
+  }
+
+  // Authorization
+  if (session.userId !== userId) {
+    return NextResponse.json(
+      {
+        error: 'NOT_AUTHORIZED',
+        message: 'Unauthorized access.',
+      },
+      { status: 403 }
+    );
+  }
+
 
   // Validate userId and productId
   if (!Types.ObjectId.isValid(userId) || !Types.ObjectId.isValid(productId)) {
