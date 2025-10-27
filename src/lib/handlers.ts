@@ -1,9 +1,29 @@
+import bcrypt from 'bcrypt'
 import Products, { Product } from '@/models/Product'
 import Users, { User, CartItem } from '@/models/User'
 import Orders, { Order, OrderItem } from '@/models/Order'
 
 import connect from '@/lib/mongoose'
 import { Types } from 'mongoose';
+
+
+export interface CheckCredentialsResponse {
+_id: Types.ObjectId
+}
+export async function checkCredentials(
+email: string,
+password: string
+): Promise<CheckCredentialsResponse | null> {
+  await connect();
+  const normalizedEmail = email.trim().toLowerCase();
+
+  const user = await Users.findOne({ email: normalizedEmail });
+
+  if (!user) return null;
+
+  const ok = await bcrypt.compare(password, user.password);
+  return ok ? { _id: user._id } : null;
+}
 
 
 export interface GetProductsResponse {
@@ -93,9 +113,10 @@ export async function createUser(user: {
   if (prevUser.length !== 0) {
     return null;
   }
-
+  const hash = await bcrypt.hash(user.password, 10)
   const doc: User = {
     ...user,
+    password: hash,
     birthdate: new Date(user.birthdate),
     cartItems: [],
     orders: [],

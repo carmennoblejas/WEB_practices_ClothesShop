@@ -8,6 +8,7 @@ import {
   ErrorResponse,
 } from '@/lib/handlers';
 import { Types } from 'mongoose';
+import { getSession } from '@/lib/auth';
 
 
 export async function PUT(
@@ -16,7 +17,27 @@ export async function PUT(
 ): Promise<NextResponse<GetUserCartResponse | ErrorResponse>> {
   const { userId, productId } = params;
 
+  const session = await getSession()
+  if (!session?.userId) {
+    return NextResponse.json(
+      {
+        error: 'NOT_AUTHENTICATED',
+        message: 'Authentication required.',
+      },
+      { status: 401 }
+    )
+  }
 
+  
+  if (session.userId.toString() !== params.userId) {
+    return NextResponse.json(
+      {
+        error: 'NOT_AUTHORIZED',
+        message: 'Unauthorized access.',
+      },
+      { status: 403 }
+    )
+  }
   // Validate userId and productId
   if (!Types.ObjectId.isValid(userId) || !Types.ObjectId.isValid(productId)) {
     return NextResponse.json(
@@ -71,7 +92,7 @@ export async function PUT(
     });
     newItem = true; // Mark it
   } else {
-    user.cartItems[existingCartItemIndex].qty += qty;
+    user.cartItems[existingCartItemIndex].qty = qty;
   }
 
 
@@ -102,6 +123,28 @@ export async function DELETE(
   { params }: { params: { userId: string; productId: string } }
 ): Promise<NextResponse<GetUserCartResponse | ErrorResponse>> {
   const { userId, productId } = params;
+  const session = await getSession()
+
+    if (!session?.userId) {
+    return NextResponse.json(
+      {
+        error: 'NOT_AUTHENTICATED',
+        message: 'Authentication required.',
+      },
+      { status: 401 }
+    )
+  }
+
+  
+  if (session.userId.toString() !== params.userId) {
+    return NextResponse.json(
+      {
+        error: 'NOT_AUTHORIZED',
+        message: 'Unauthorized access.',
+      },
+      { status: 403 }
+    )
+  }
 
   // Validate userId and productId
   if (!Types.ObjectId.isValid(userId) || !Types.ObjectId.isValid(productId)) {
