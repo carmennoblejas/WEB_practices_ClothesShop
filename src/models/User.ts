@@ -1,9 +1,9 @@
 import mongoose, { Schema, Types } from 'mongoose';
 import { Product } from "./Product";
 
- export interface CartItem {
-    product: Types.ObjectId | Product[];
-    qty: number;
+export interface CartItem {
+  product: Types.ObjectId | Product[];
+  qty: number;
   }
 
 export interface User {

@@ -1,7 +1,7 @@
 import { Types } from 'mongoose'
 import { NextRequest, NextResponse } from 'next/server'
 import { ErrorResponse, getUser, GetUserResponse } from '@/lib/handlers'
-import { create } from 'domain'
+import { getSession } from '@/lib/auth'
 
 export async function GET(
   request: NextRequest,
@@ -11,6 +11,28 @@ export async function GET(
     params: { userId: string }
   }
 ): Promise<NextResponse<GetUserResponse> | NextResponse<ErrorResponse>> {
+  const session = await getSession()
+  if (!session?.userId) {
+    return NextResponse.json(
+      {
+        error: 'NOT_AUTHENTICATED',
+        message: 'Authentication required.',
+      },
+      { status: 401 }
+    )
+  }
+
+  
+  if (session.userId.toString() !== params.userId) {
+    return NextResponse.json(
+      {
+        error: 'NOT_AUTHORIZED',
+        message: 'Unauthorized access.',
+      },
+      { status: 403 }
+    )
+  }
+
   if (!Types.ObjectId.isValid(params.userId)) {
     return NextResponse.json(
       {
