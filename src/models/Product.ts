@@ -31,8 +31,10 @@ const ProductSchema = new Schema<Product>(
       type: Number,
       require: true,
       unique:false,
-    } 
-
-  }
+    }
+  },
+  {
+       versionKey: false,
+    }
 )
 export default mongoose.models.Product as mongoose.Model<Product> || mongoose.model<Product>('Product', ProductSchema);

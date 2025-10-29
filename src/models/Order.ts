@@ -30,6 +30,10 @@ const OrderSchema = new Schema<Order>({
     date: {type: Date, required: true, default: Date.now}, 
     cardHolder: {type: String, required:true},
     cardNumber: {type: String, required: true}, 
-});
+},
+{
+       versionKey: false,
+    }
+);
 
 export default (mongoose.models.Order as mongoose.Model<Order>) || mongoose.model<Order>('Order', OrderSchema);
