@@ -64,6 +64,10 @@ const UserSchema = new Schema<User>({
         ref: 'Order',
       },
     ],
-  });
+  },
+{
+       versionKey: false,
+    }
+);
 
   export default mongoose.models.User as mongoose.Model<User> || mongoose.model<User>('User', UserSchema);
