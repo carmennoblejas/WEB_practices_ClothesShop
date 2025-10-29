@@ -3,7 +3,7 @@ import {
   ShoppingCartIcon,
   UserIcon,
 } from '@heroicons/react/24/outline'
-import NavbarButton from '@/components/Navbarbutton'
+import NavbarButton from '@/components/NavbarButton'
 import Link from 'next/link'
 import { getSession } from '@/lib/auth'
 
