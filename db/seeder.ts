@@ -29,7 +29,7 @@ async function seed() {
     {
       name: 'Orange Birkin 25',
       price: 5999.95,
-      img: '/img/ecommerce-images/image-card-01.jpg',
+      img: '/img\Hermes-Birkin-25-Orange-Togo-Palladium-Hardware-2024-1-1-900x600.jpg',
       description: 'Ideal everyday bag for autumn',
     },
     {
