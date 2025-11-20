@@ -1,6 +1,7 @@
 import { Product } from '@/models/Product'
 import { Types } from 'mongoose'
 import Link from 'next/link'
+import Image from 'next/image'
 
 interface ProductTileProps {
   product: Product & { _id: Types.ObjectId }
