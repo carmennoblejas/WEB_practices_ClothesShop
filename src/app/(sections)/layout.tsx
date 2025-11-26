@@ -3,16 +3,27 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import React from 'react'
 
+// Fuente elegante importada desde Google Fonts (Playfair Display)
+import { Playfair_Display } from 'next/font/google'
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  display: 'swap',
+})
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className='flex min-h-screen flex-col'>
-      <Navbar />
-      <Header />
-    <main className='mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8'>
-    {children}
-    </main>
-      <Footer />
-    </div>
+    <html lang="en">
+      <body className={`${playfair.className} bg-gray-900 text-white antialiased`}>
+        <div className="flex min-h-screen flex-col">
+          <Navbar />
+          <Header />
+          <main className="w-full max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+            {children}
+          </main>
+          <Footer />
+        </div>
+      </body>
+    </html>
   )
 }

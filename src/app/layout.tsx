@@ -1,15 +1,17 @@
+// src/app/(sections)/layout.tsx
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
+import { Playfair_Display } from 'next/font/google'
+import '/src/app/globals.css' 
 
-const inter = Inter({
+const playfair = Playfair_Display({
   subsets: ['latin'],
+  weight: ['400', '700'],
   display: 'swap',
 })
 
 export const metadata: Metadata = {
-  title: 'WES App',
-  description: 'Base files for the WES course',
+  title: 'Bag Shop',
+  description: 'Your perfect shop to find your dream bag',
 }
 
 export default function RootLayout({
@@ -19,7 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${inter.className} antialiased`}>{children}</body>
+      <body className={`${playfair.className} bg-gray-900 text-white antialiased`}>
+        {children}
+      </body>
     </html>
   )
 }

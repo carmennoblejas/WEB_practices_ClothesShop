@@ -5,12 +5,20 @@ export default async function Index() {
   const data = await getProducts()
 
   return (
-    <div className='flex flex-col'>
-      <div className='grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8'>
-        {data.products.map((product) => (
-          <ProductTile key={product._id.toString()} product={product} />
-        ))}
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-900">
+      <div className="max-w-7xl mx-auto">
+        {/* Título principal */}
+        <h1 className="text-4xl font-serif font-bold text-white mb-10 text-center">
+          Our Collection
+        </h1>
+
+        {/* Grid de productos */}
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+          {data.products.map((product) => (
+            <ProductTile key={product._id.toString()} product={product} />
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   )
 }

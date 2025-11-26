@@ -11,54 +11,59 @@ export default async function Navbar() {
   const session = await getSession()
 
   return (
-    <nav className='fixed top-0 z-50 w-full bg-gray-800 bg-opacity-90 backdrop-blur-lg backdrop-filter'>
+    <nav className='fixed top-0 z-50 w-full bg-gray-950 bg-opacity-95 shadow-lg backdrop-blur-lg'>
       <div className='mx-auto max-w-7xl px-6 sm:px-8 lg:px-10'>
-        <div className='relative flex h-16 items-center justify-between'>
-          <div className='flex flex-1 items-stretch justify-start'>
-            <Link
-              className='flex flex-shrink-0 items-center space-x-4 text-gray-300 hover:text-gray-100'
-              href='/'
+        <div className='flex h-16 items-center justify-between'>
+          {/* Logo + title */}
+          <div className='flex items-center space-x-3'>
+            {/* SVG bolso como logo */}
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              strokeWidth={1.5}
+              stroke='currentColor'
+              className='h-7 w-7 text-pink-200'
             >
-              <img
-                className='block h-8 w-auto'
-                src='/img/logo.svg'
-                alt='GameShop logo'
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='M8 7V6a4 4 0 118 0v1m3 0a1 1 0 011 1v2.5a1 1 0 01-.13.5L18 20.5a2 2 0 01-1.87 1.25H7.87A2 2 0 016 20.5L3.13 11a1 1 0 01-.13-.5V8a1 1 0 011-1h16z'
               />
-              <div className='inline-block w-auto text-xl font-semibold'>
-                GameShop
-              </div>
+            </svg>
+            <Link href='/' className='text-2xl font-serif tracking-wide text-pink-100 hover:text-white transition'>
+              Bag Shop
             </Link>
           </div>
-          <div className='absolute inset-y-0 right-0 flex items-center space-x-4'>
+
+          {/* Botones */}
+          <div className='flex items-center space-x-4'>
             {session ? (
               <>
                 <NavbarButton href='/cart'>
                   <span className='sr-only'>Cart</span>
-                  <ShoppingCartIcon className='h-6 w-6' aria-hidden='true' />
+                  <ShoppingCartIcon className='h-6 w-6 text-gray-300 hover:text-white transition' />
                 </NavbarButton>
                 <NavbarButton href='/profile'>
                   <span className='sr-only'>User profile</span>
-                  <UserIcon className='h-6 w-6' aria-hidden='true' />
+                  <UserIcon className='h-6 w-6 text-gray-300 hover:text-white transition' />
                 </NavbarButton>
                 <NavbarButton href='#'>
                   <span className='sr-only'>Sign out</span>
-                  <ArrowRightStartOnRectangleIcon
-                    className='h-6 w-6'
-                    aria-hidden='true'
-                  />
+                  <ArrowRightStartOnRectangleIcon className='h-6 w-6 text-gray-300 hover:text-white transition' />
                 </NavbarButton>
               </>
             ) : (
               <>
                 <Link
                   href='/auth/signup'
-                  className='rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-gray-100'
+                  className='rounded-md px-4 py-2 text-sm font-medium text-gray-300 hover:bg-gray-800 hover:text-white transition'
                 >
                   Sign up
                 </Link>
                 <Link
                   href='/auth/signin'
-                  className='rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-gray-100'
+                  className='rounded-md px-4 py-2 text-sm font-medium text-gray-300 hover:bg-gray-800 hover:text-white transition'
                 >
                   Sign in
                 </Link>
