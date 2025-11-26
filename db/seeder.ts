@@ -29,14 +29,56 @@ async function seed() {
     {
       name: 'Orange Birkin 25',
       price: 5999.95,
-      img: '/img/Birkin naranja.jpg',
+      img: '/img/Birkinnaranja.png',
       description: 'Ideal everyday bag for autumn',
     },
     {
       name: 'Lady Dior',
       price: 2449.95,
-      img: '/img/ladydior.jpg',
+      img: '/img/ladydiorgris.png',
       description: 'Classy small bag for all type of events',
+    },
+     {
+      name: 'Jacquemus',
+      price: 820,
+      img: '/img/jaquemus.png',
+      description: 'Perfect juvenil bag',
+    },
+     {
+      name: 'Louis Vouitton Side Trunk',
+      price: 3000,
+      img: '/img/louisvuitton.png',
+      description: 'Chic bag for that brunch',
+    },
+     {
+      name: 'Kelly',
+      price: 7000,
+      img: '/img/kelly.png',
+      description: 'Perfect as a classy business bag',
+    },
+     {
+      name: 'Bvlgari',
+      price: 6500,
+      img: '/img/bvlgarisf.png',
+      description: 'Impress in that event with your bvlgari',
+    },
+     {
+      name: 'Picotin',
+      price: 3850,
+      img: '/img/picotin.png',
+      description: 'Classy small bag',
+    },
+     {
+      name: 'Dior Toujours',
+      price: 3000,
+      img: '/img/diortoujours.png',
+      description: 'All eyes on you',
+    },
+     {
+      name: 'Chanel Double Classic',
+      price: 6500,
+      img: '/img/chanel.png',
+      description: 'Incredible breathtaking bag',
     },
   ]
   const insertedProducts = await Products.insertMany(products)
