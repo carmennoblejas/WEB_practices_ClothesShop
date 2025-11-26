@@ -17,7 +17,7 @@ export default function ProductTile({ product }: ProductTileProps) {
         <img
           src={product.img}
           alt={product.name}
-          className='h-full w-full object-cover object-center transition group-hover:scale-105'
+          className="absolute inset-0 w-full h-full object-cover object-center"
         />
       </div>
 
