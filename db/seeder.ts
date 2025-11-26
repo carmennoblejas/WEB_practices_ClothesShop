@@ -35,7 +35,7 @@ async function seed() {
     {
       name: 'Lady Dior',
       price: 2449.95,
-      img: '/img/ecommerce-images/image-card-02.jpg',
+      img: '/img/ladydior.jpg',
       description: 'Classy small bag for all type of events',
     },
   ]
