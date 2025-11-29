@@ -14,7 +14,7 @@ export default function OrderContent({ order }: { order: Order }) {
     <section className="max-w-6xl mx-auto px-6 py-12 text-white">
       <h1 className="text-3xl font-serif font-bold mb-8 text-center">Order Details</h1>
 
-      {/* 📦 Información del pedido */}
+      
       <div className="bg-gray-800 p-6 rounded-lg shadow-lg mb-12 space-y-4">
         <h2 className="text-2xl font-bold text-white mb-4">Order Info</h2>
 
@@ -43,7 +43,7 @@ export default function OrderContent({ order }: { order: Order }) {
         </div>
       </div>
 
-      {/* 👜 Tabla de productos */}
+    
       <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold text-white mb-4">Products</h2>
 
