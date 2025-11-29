@@ -17,6 +17,12 @@ export default async function Cart() {
   }
 
   const plainCart = JSON.parse(JSON.stringify(cart.cartItems))
-
+  if (cart.cartItems.length != 0){
   return <CartContent cartItems={plainCart} />
+  }
+  return <div className="flex items-center justify-between gap-6 bg-gray-800 p-4 rounded-lg shadow-md hover:bg-gray-700 transition">
+        <p className="text-white text-lg font-bold">
+          Your cart is empty
+        </p>
+      </div>
 }
