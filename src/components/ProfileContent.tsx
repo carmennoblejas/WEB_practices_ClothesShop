@@ -3,6 +3,12 @@
 import { GetUserResponse } from '@/lib/handlers'
 import { GetUserOrdersResponse } from '@/lib/handlers'
 import Link from 'next/link'
+import {
+  UserIcon,
+  EnvelopeIcon,
+  MapPinIcon,
+  CalendarDaysIcon,
+} from '@heroicons/react/24/outline'
 
 export default function ProfileContent({
   user,
@@ -19,19 +25,29 @@ export default function ProfileContent({
       <div className="bg-gray-800 p-6 rounded-lg shadow-lg mb-12 space-y-4">
         <h2 className="text-2xl font-bold text-white mb-2">Personal Information</h2>
 
-        <p>
-          <span className="text-pink-300 font-semibold">Name:</span> {user.name} {user.surname}
-        </p>
-        <p>
-          <span className="text-pink-300 font-semibold">Email:</span> {user.email}
-        </p>
-        <p>
-          <span className="text-pink-300 font-semibold">Address:</span> {user.address}
-        </p>
-        <p>
-          <span className="text-pink-300 font-semibold">Birth date:</span>{' '}
-          {new Date(user.birthdate).toLocaleDateString()}
-        </p>
+        <div className="flex items-center gap-2">
+          <UserIcon className="h-5 w-5 text-pink-300" />
+          <span className="text-pink-300 font-semibold">Name:</span>
+          <span className="text-white">{user.name} {user.surname}</span>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <EnvelopeIcon className="h-5 w-5 text-pink-300" />
+          <span className="text-pink-300 font-semibold">Email:</span>
+          <span className="text-white">{user.email}</span>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <MapPinIcon className="h-5 w-5 text-pink-300" />
+          <span className="text-pink-300 font-semibold">Address:</span>
+          <span className="text-white">{user.address}</span>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <CalendarDaysIcon className="h-5 w-5 text-pink-300" />
+          <span className="text-pink-300 font-semibold">Birth date:</span>
+          <span className="text-white">{new Date(user.birthdate).toLocaleDateString()}</span>
+        </div>
       </div>
 
       {/* 📦 Pedidos realizados */}
@@ -85,7 +101,7 @@ export default function ProfileContent({
             </table>
           </div>
         ) : (
-          <p className="text-gray-400">Aún no has realizado ningún pedido.</p>
+          <p className="text-gray-400">You have not made any orders yet.</p>
         )}
       </div>
     </section>
