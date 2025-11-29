@@ -14,7 +14,6 @@ interface CartItem {
 export default function CartContent({ cartItems }: { cartItems: CartItem[] }) {
   const router = useRouter()
 
-  // Simulación de eliminación (puedes reemplazar con lógica real)
   const handleDelete = (productId: string) => {
     console.log(`Eliminar producto con ID: ${productId}`)
     // Aquí iría la lógica para eliminar del carrito
@@ -23,6 +22,8 @@ export default function CartContent({ cartItems }: { cartItems: CartItem[] }) {
   const handleCheckout = () => {
     router.push('/checkout') // Asegúrate de tener esta ruta creada
   }
+
+  const totalCartPrice = cartItems.reduce((sum, item) => sum + item.product.price * item.qty, 0)
 
   return (
     <section className="space-y-6">
@@ -81,8 +82,15 @@ export default function CartContent({ cartItems }: { cartItems: CartItem[] }) {
         )
       })}
 
-      {/* Checkout button */}
-      <div className="pt-8 text-center">
+      {/* 💰 Total row */}
+      <div className="flex items-center justify-between gap-6 bg-gray-800 p-4 rounded-lg shadow-md hover:bg-gray-700 transition">
+        <p className="text-white text-lg font-bold text-right ml-auto">
+          Total: <span className="ml-16">{totalCartPrice.toFixed(2)} €</span>
+        </p>
+      </div>
+
+      {/* ✅ Checkout button */}
+      <div className="pt-4 text-center">
         <button
           type="button"
           onClick={handleCheckout}
