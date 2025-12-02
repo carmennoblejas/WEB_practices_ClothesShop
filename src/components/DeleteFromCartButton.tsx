@@ -33,7 +33,7 @@ export default function DeleteFromCartButton({ userId, productId, onDeleteSucces
   return (
     <button
       onClick={handleDelete}
-      className="btn btn-outline  btn-error dark:border-red-500 dark:text-red-500 group-hover:scale-105 transition-transform duration-300"
+      className="px-4 py-2 rounded-md border border-red-500 dark:border-red-500 text-red-600 dark:text-red-500 bg-transparent hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white font-medium transition-all duration-300 group-hover:scale-105"
     >
       Delete
     </button>

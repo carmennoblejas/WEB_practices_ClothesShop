@@ -22,14 +22,14 @@ export function ThemeSwitcher() {
 
   return (
     <button
-      className="rounded-full p-2 text-gray-400 hover:text-gray-900 focus:text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-400 dark:text-gray-300 dark:hover:text-white dark:focus:text-white dark:focus:ring-gray-300"
+      className="rounded-full p-2 text-text-muted dark:text-text-dark-muted hover:text-text-main dark:hover:text-text-dark-main focus:text-text-main dark:focus:text-text-dark-main focus:outline-none focus:ring-2 focus:ring-secondary dark:focus:ring-accent transition"
       onClick={toggleTheme}
       aria-label="Toggle Theme"
     >
       {currentTheme === 'dark' ? (
-        <SunIcon className="h-6 w-6 text-yellow-500" aria-hidden="true" />
+        <SunIcon className="h-6 w-6 text-accent" aria-hidden="true" />
       ) : (
-        <MoonIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
+        <MoonIcon className="h-6 w-6 text-secondary" aria-hidden="true" />
       )}
     </button>
   );

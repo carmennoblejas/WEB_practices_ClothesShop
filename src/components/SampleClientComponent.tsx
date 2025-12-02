@@ -42,22 +42,24 @@ export default function SampleClientComponent() {
   }
 
   return (
-    <div>
-      <p>
+    <div className="space-y-4">
+      <p className="text-text-main dark:text-text-dark-main">
         You clicked {leftCount} and {rightCount} times
       </p>
-      <button
-        className='rounded-md bg-gray-800 px-4 py-2 text-center text-gray-100 hover:bg-gray-700 hover:text-gray-50'
-        onClick={handleLeftClick}
-      >
-        Left button
-      </button>
-      <button
-        className='rounded-md bg-gray-800 px-4 py-2 text-center text-gray-100 hover:bg-gray-700 hover:text-gray-50'
-        onClick={handleRightClick}
-      >
-        Right button
-      </button>
+      <div className="flex gap-3">
+        <button
+          className='rounded-md bg-primary hover:bg-primary-hover px-4 py-2 text-center text-white dark:text-text-dark-main font-medium transition'
+          onClick={handleLeftClick}
+        >
+          Left button
+        </button>
+        <button
+          className='rounded-md bg-secondary hover:bg-secondary-hover px-4 py-2 text-center text-white dark:text-text-dark-main font-medium transition'
+          onClick={handleRightClick}
+        >
+          Right button
+        </button>
+      </div>
     </div>
   )
 }

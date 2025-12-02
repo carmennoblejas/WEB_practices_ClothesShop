@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <body className={`${playfair.className} bg-gray-900 text-white antialiased`}>
+      <body className={`${playfair.className} bg-background dark:bg-background-dark text-text-main dark:text-text-dark-main antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           {children}
         </ThemeProvider>

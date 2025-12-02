@@ -11,7 +11,7 @@ interface CartItemCounterProps {
 
 export default function CartItemCounter({ userId, productId, value }: CartItemCounterProps) {
   const router = useRouter();
-  const [quantity, setQuantity] = useState(value); // Inicia con el valor recibido
+  const [quantity, setQuantity] = useState(value);
   const [isUpdating, setIsUpdating] = useState(false);
 
   const updateCart = async (newQuantity: number) => {
@@ -22,8 +22,8 @@ export default function CartItemCounter({ userId, productId, value }: CartItemCo
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ qty: newQuantity }),
       });
-      setQuantity(newQuantity); // Actualiza el estado local
-      router.refresh(); // Refresca el estado de la página
+      setQuantity(newQuantity);
+      router.refresh();
     } finally {
       setIsUpdating(false);
     }
@@ -40,25 +40,25 @@ export default function CartItemCounter({ userId, productId, value }: CartItemCo
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newQuantity = Math.max(1, Math.min(50, Number(event.target.value))); // Limita entre 1 y 50
+    const newQuantity = Math.max(1, Math.min(50, Number(event.target.value)));
     setQuantity(newQuantity);
   };
 
   const handleBlur = () => {
-    updateCart(quantity); // Actualiza el carrito al perder foco
+    updateCart(quantity);
   };
 
   return (
-    <div className="w-full h-11 flex items-center justify-between  rounded-lg bg-gray-100 dark:border-gray-600 dark:bg-gray-700">
-      {/* w-full h-14 flex items-center justify-between border border-gray-300 rounded-lg bg-gray-100 dark:border-gray-600 dark:bg-gray-700 */}
+    <div className="w-full h-11 flex items-center justify-between rounded-lg bg-background-secondary dark:bg-background-dark-secondary border border-border-light dark:border-border-dark">
+      {/* Botón decrementar */}
       <button
         type="button"
         onClick={handleDecrement}
         disabled={isUpdating || quantity <= 1}
-        className="h-11 items-center w-11 rounded-l-lg border border-gray-300 bg-gray-100 p-2 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-900"
+        className="h-11 w-11 rounded-l-lg border border-border-light dark:border-border-dark bg-background-secondary dark:bg-background-dark-secondary p-2 hover:bg-background dark:hover:bg-background-dark focus:outline-none focus:ring-2 focus:ring-secondary dark:focus:ring-accent transition disabled:opacity-50"
       >
         <svg
-          className="h-4 w-4 text-gray-900 dark:text-white"
+          className="h-4 w-4 text-text-main dark:text-text-dark-main"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -84,19 +84,19 @@ export default function CartItemCounter({ userId, productId, value }: CartItemCo
         min="1"
         max="50"
         disabled={isUpdating}
-        className="h-11 w-16 text-center w-full border-t border-b border-gray-300 bg-gray-50 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300"
+        className="h-11 w-16 text-center border-t border-b border-border-light dark:border-border-dark bg-background dark:bg-background-dark text-sm text-text-main dark:text-text-dark-main focus:border-secondary dark:focus:border-accent focus:ring-secondary dark:focus:ring-accent focus:outline-none"
         style={{ appearance: 'textfield' }}
       />
 
-      {/* Botón para incrementar */}
+      {/* Botón incrementar */}
       <button
         type="button"
         onClick={handleIncrement}
         disabled={isUpdating}
-        className="h-11 w-11 rounded-r-lg border border-gray-300 bg-gray-100 p-2 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
+        className="h-11 w-11 rounded-r-lg border border-border-light dark:border-border-dark bg-background-secondary dark:bg-background-dark-secondary p-2 hover:bg-background dark:hover:bg-background-dark focus:outline-none focus:ring-2 focus:ring-secondary dark:focus:ring-accent transition disabled:opacity-50"
       >
         <svg
-          className="h-4 w-4 text-gray-900 dark:text-white"
+          className="h-4 w-4 text-text-main dark:text-text-dark-main"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

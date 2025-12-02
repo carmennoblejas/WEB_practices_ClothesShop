@@ -1,10 +1,14 @@
+
+
 export default function Footer() {
   return (
     <footer className='mx-auto mt-auto w-full max-w-screen-xl px-4 py-6 sm:px-6 lg:px-8'>
-      <hr className='border-gray-300' />
-      <span className='block pt-6 text-center text-xs font-light text-gray-400'>
-        Web Engineering and Services - &copy;&nbsp;BagShop
-      </span>
+      <hr className='border-border-light dark:border-border-dark' />
+      <div className='flex items-center justify-center gap-4 pt-6'>
+        <span className='text-center text-xs font-light text-text-muted dark:text-text-dark-muted'>
+          Web Engineering and Services - &copy;&nbsp;BagShop
+        </span>
+      </div>
     </footer>
   )
 }

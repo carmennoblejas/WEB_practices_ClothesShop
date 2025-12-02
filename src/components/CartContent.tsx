@@ -35,10 +35,10 @@ export default function CartContent({ cartItems }: { cartItems: CartItem[] }) {
         return (
           <div
             key={product._id.toString()}
-            className="flex items-center justify-between gap-6 bg-gray-800 p-4 rounded-lg shadow-md hover:bg-gray-700 transition"
+            className="flex items-center justify-between gap-6 bg-background-secondary dark:bg-background-dark-secondary p-4 rounded-lg shadow-md hover:bg-background dark:hover:bg-background-dark border border-border-light dark:border-border-dark transition"
           >
             {/* Imagen */}
-            <div className="relative w-32 h-20 flex-shrink-0 overflow-hidden rounded-md bg-gray-900">
+            <div className="relative w-32 h-20 flex-shrink-0 overflow-hidden rounded-md bg-background dark:bg-background-dark">
               <Image
                 src={product.img}
                 alt={product.name}
@@ -53,31 +53,31 @@ export default function CartContent({ cartItems }: { cartItems: CartItem[] }) {
             <div className="flex-1 min-w-0">
               <Link
                 href={`/products/${product._id}`}
-                className="block text-white font-medium text-md hover:underline truncate"
+                className="block text-text-main dark:text-text-dark-main font-medium text-md hover:text-secondary dark:hover:text-accent transition truncate"
               >
                 {product.name}
               </Link>
-              <p className="text-sm text-gray-400 mt-1">Per unit: {unitPrice} €</p>
+              <p className="text-sm text-text-muted dark:text-text-dark-muted mt-1">Per unit: {unitPrice} €</p>
             </div>
 
             {/* Precio total */}
             <div className="text-right">
-              <p className="text-white font-semibold text-lg">{totalPrice} €</p>
+              <p className="text-accent dark:text-accent font-semibold text-lg">{totalPrice} €</p>
             </div>
 
             {/* Controles */}
             <div className="flex items-center gap-2">
-              <button className="px-2 py-1 rounded bg-gray-700 text-white hover:bg-gray-600">-</button>
-              <span className="px-2 text-white">{qty}</span>
-              <button className="px-2 py-1 rounded bg-gray-700 text-white hover:bg-gray-600">+</button>
+              <button className="px-2 py-1 rounded bg-background dark:bg-background-dark text-text-main dark:text-text-dark-main hover:bg-background-secondary dark:hover:bg-background-dark-secondary border border-border-light dark:border-border-dark transition">-</button>
+              <span className="px-2 text-text-main dark:text-text-dark-main">{qty}</span>
+              <button className="px-2 py-1 rounded bg-background dark:bg-background-dark text-text-main dark:text-text-dark-main hover:bg-background-secondary dark:hover:bg-background-dark-secondary border border-border-light dark:border-border-dark transition">+</button>
 
               {/* Trash button */}
               <button
                 type="button"
-                onClick={() => handleDelete(product._id.toString())} //parece que habra que añadir el _id en el modelo Product
-                className="p-2 hover:text-red-500 transition-colors"
+                onClick={() => handleDelete(product._id.toString())}
+                className="p-2 text-text-muted dark:text-text-dark-muted hover:text-red-600 dark:hover:text-red-400 transition-colors"
               >
-                <TrashIcon className="h-5 w-5 text-gray-400" />
+                <TrashIcon className="h-5 w-5" />
               </button>
             </div>
           </div>
@@ -85,9 +85,9 @@ export default function CartContent({ cartItems }: { cartItems: CartItem[] }) {
       })}
 
       {/* Total row */}
-      <div className="flex items-center justify-between gap-6 bg-gray-800 p-4 rounded-lg shadow-md hover:bg-gray-700 transition">
-        <p className="text-white text-lg font-bold text-right ml-auto">
-          Total: <span className="ml-16">{totalCartPrice.toFixed(2)} €</span>
+      <div className="flex items-center justify-between gap-6 bg-background-secondary dark:bg-background-dark-secondary p-4 rounded-lg shadow-md border border-border-light dark:border-border-dark">
+        <p className="text-text-main dark:text-text-dark-main text-lg font-bold text-right ml-auto">
+          Total: <span className="ml-16 text-accent">{totalCartPrice.toFixed(2)} €</span>
         </p>
       </div>
 
@@ -96,7 +96,7 @@ export default function CartContent({ cartItems }: { cartItems: CartItem[] }) {
         <button
           type="button"
           onClick={handleCheckout}
-          className="bg-gray-700 hover:bg-gray-600 text-white font-semibold px-6 py-3 rounded-md shadow-md transition"
+          className="bg-primary hover:bg-primary-hover text-white dark:text-text-dark-main font-semibold px-6 py-3 rounded-md shadow-md transition"
         >
           Checkout
         </button>

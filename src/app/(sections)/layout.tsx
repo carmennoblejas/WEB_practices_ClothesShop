@@ -13,8 +13,8 @@ const playfair = Playfair_Display({
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={`${playfair.className} bg-gray-900 text-white antialiased`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${playfair.className} bg-background dark:bg-background-dark text-text-main dark:text-text-dark-main antialiased`}>
         <div className="flex min-h-screen flex-col">
           <Navbar />
           <Header />

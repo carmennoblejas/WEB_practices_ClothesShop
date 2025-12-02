@@ -18,11 +18,13 @@ export default async function Cart() {
 
   const plainCart = JSON.parse(JSON.stringify(cart.cartItems))
   if (cart.cartItems.length != 0){
-  return <CartContent cartItems={plainCart} />
+    return <CartContent cartItems={plainCart} />
   }
-  return <div className="flex items-center justify-between gap-6 bg-gray-800 p-4 rounded-lg shadow-md hover:bg-gray-700 transition">
-        <p className="text-white text-lg font-bold">
-          Your cart is empty
-        </p>
-      </div>
+  return (
+    <div className="flex items-center justify-center gap-6 bg-background-secondary dark:bg-background-dark-secondary p-8 rounded-lg shadow-md border border-border-light dark:border-border-dark">
+      <p className="text-text-main dark:text-text-dark-main text-lg font-bold">
+        Your cart is empty
+      </p>
+    </div>
+  )
 }
