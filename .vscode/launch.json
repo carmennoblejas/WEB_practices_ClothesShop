@@ -8,13 +8,15 @@
       "command": "npm run dev"
     },
     {
-      "name": "Next.js: debug client-side",
-      "type": "chrome",
+      "name": "Next.js: debug client-side (Brave)",
+      "type": "pwa-chrome",
       "request": "launch",
       "url": "http://localhost:3000",
+      "runtimeExecutable": "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe",
+      "userDataDir": "${workspaceFolder}/.vscode/brave-profile",
       "resolveSourceMapLocations": [
-          "!**/node_modules/**"
-      ],
+        "!**/node_modules/**"
+      ]
     }
   ]
 }
