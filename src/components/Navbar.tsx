@@ -6,12 +6,13 @@ import {
 import NavbarButton from '@/components/NavbarButton'
 import Link from 'next/link'
 import { getSession } from '@/lib/auth'
+import { ThemeSwitcher } from '@/components/ThemeSwitcher'
 
 export default async function Navbar() {
   const session = await getSession()
 
   return (
-    <nav className='fixed top-0 z-50 w-full bg-gray-950 bg-opacity-95 shadow-lg backdrop-blur-lg'>
+    <nav className='fixed top-0 z-50 w-full bg-gray-950 bg-opacity-95 shadow-lg backdrop-blur-lg dark:bg-gray-950 dark:bg-opacity-95'>
       <div className='mx-auto max-w-7xl px-6 sm:px-8 lg:px-10'>
         <div className='flex h-16 items-center justify-between'>
           {/* Logo + title */}
@@ -38,6 +39,9 @@ export default async function Navbar() {
 
           {/* Botones */}
           <div className='flex items-center space-x-4'>
+            {/* Theme Switcher */}
+            <ThemeSwitcher />
+
             {session ? (
               <>
                 <NavbarButton href='/cart'>
