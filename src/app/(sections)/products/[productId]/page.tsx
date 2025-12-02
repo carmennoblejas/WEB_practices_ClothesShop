@@ -26,6 +26,7 @@ export default async function Product({
             src={product.img}
             alt={product.name}
             fill
+            priority
             className="object-cover object-center"
           />
         </div>

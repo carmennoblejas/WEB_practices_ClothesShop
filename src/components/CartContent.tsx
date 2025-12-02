@@ -43,6 +43,8 @@ export default function CartContent({ cartItems }: { cartItems: CartItem[] }) {
                 src={product.img}
                 alt={product.name}
                 fill
+                priority
+                sizes="150px"
                 className="object-cover object-center"
               />
             </div>
@@ -72,7 +74,7 @@ export default function CartContent({ cartItems }: { cartItems: CartItem[] }) {
               {/* Trash button */}
               <button
                 type="button"
-                onClick={() => handleDelete(product._id.toString())}
+                onClick={() => handleDelete(product._id.toString())} //parece que habra que añadir el _id en el modelo Product
                 className="p-2 hover:text-red-500 transition-colors"
               >
                 <TrashIcon className="h-5 w-5 text-gray-400" />
