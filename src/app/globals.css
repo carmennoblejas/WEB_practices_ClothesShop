@@ -3,32 +3,32 @@
 @tailwind utilities;
 
 :root {
-  /* Light mode - Paleta minimalista elegante */
-  --background: #FAFAFA;           /* Blanco hueso */
-  --background-secondary: #F5F5F5; /* Gris muy claro para cards */
-  --foreground: #1A1A1A;           /* Negro suave */
-  --text-muted: #6B6B6B;           /* Gris medio */
-  --border-light: #E5E5E5;         /* Bordes sutiles */
   
-  /* Acentos */
-  --primary: #2C2C2C;              /* Negro suave para botones */
-  --secondary: #8B7355;            /* Marrón cuero */
-  --accent: #D4AF37;               /* Dorado elegante */
+  --background: #FAFAFA;           
+  --background-secondary: #F5F5F5; 
+  --foreground: #1A1A1A;           
+  --text-muted: #6B6B6B;           
+  --border-light: #E5E5E5;         
+  
+  
+  --primary: #2C2C2C;              
+  --secondary: #8B7355;            
+  --accent: #D4AF37;               
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Dark mode - Sofisticado */
-    --background: #0F0F0F;              /* Negro profundo */
-    --background-secondary: #1A1A1A;    /* Gris oscuro para cards */
-    --foreground: #F5F5F5;              /* Blanco hueso */
-    --text-muted: #A3A3A3;              /* Gris medio claro */
-    --border-light: #2C2C2C;            /* Bordes discretos */
     
-    /* Acentos (mantienen consistencia) */
-    --primary: #454545;                 /* Variante clara del negro */
-    --secondary: #A68968;               /* Marrón claro */
-    --accent: #D4AF37;                  /* Dorado (igual) */
+    --background: #0F0F0F;              
+    --background-secondary: #1A1A1A;    
+    --foreground: #F5F5F5;              
+    --text-muted: #A3A3A3;            
+    --border-light: #2C2C2C;         
+    
+    
+    --primary: #454545;                 
+    --secondary: #A68968;               
+    --accent: #D4AF37;                 
   }
 }
 
@@ -42,7 +42,7 @@ body {
   }
 }
 
-/* Scrollbar personalizado (opcional - elegante) */
+/* Scrollbar */
 @layer base {
   ::-webkit-scrollbar {
     @apply w-2;
