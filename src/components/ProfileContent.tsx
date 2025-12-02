@@ -21,7 +21,7 @@ export default function ProfileContent({
     <section className="max-w-6xl mx-auto px-6 py-12 text-white">
       <h1 className="text-3xl font-serif font-bold mb-8 text-center">My profile</h1>
 
-      {/* 🧍 Información personal */}
+      {/* Información personal */}
       <div className="bg-gray-800 p-6 rounded-lg shadow-lg mb-12 space-y-4">
         <h2 className="text-2xl font-bold text-white mb-2">Personal Information</h2>
 
@@ -50,7 +50,7 @@ export default function ProfileContent({
         </div>
       </div>
 
-      {/* 📦 Pedidos realizados */}
+      {/* Pedidos realizados */}
       <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold text-white mb-4">Completed orders</h2>
 

@@ -82,14 +82,14 @@ export default function CartContent({ cartItems }: { cartItems: CartItem[] }) {
         )
       })}
 
-      {/* 💰 Total row */}
+      {/* Total row */}
       <div className="flex items-center justify-between gap-6 bg-gray-800 p-4 rounded-lg shadow-md hover:bg-gray-700 transition">
         <p className="text-white text-lg font-bold text-right ml-auto">
           Total: <span className="ml-16">{totalCartPrice.toFixed(2)} €</span>
         </p>
       </div>
 
-      {/* ✅ Checkout button */}
+      {/* Checkout button */}
       <div className="pt-4 text-center">
         <button
           type="button"
