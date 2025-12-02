@@ -30,7 +30,7 @@ export default function CheckOutForm({
   const handlePurchase = () => {
     console.log('Procesando compra...')
     console.log({ address, cardHolder, cardNumber })
-    // Aquí puedes hacer una llamada a tu API para guardar el pedido
+    // llamar a api para guardar pedido
   }
 
   return (

@@ -18,7 +18,7 @@ export default function DeleteFromCartButton({ userId, productId, onDeleteSucces
 
       if (response.ok) {
         alert('Product removed from cart successfully!');
-        onDeleteSuccess?.(); // Llama al callback si se proporciona
+        onDeleteSuccess?.(); // llama al callback si se proporciona
         router.refresh();
       } else {
         const data = await response.json();
