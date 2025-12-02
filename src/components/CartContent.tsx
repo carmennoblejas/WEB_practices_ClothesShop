@@ -16,11 +16,11 @@ export default function CartContent({ cartItems }: { cartItems: CartItem[] }) {
 
   const handleDelete = (productId: string) => {
     console.log(`Eliminar producto con ID: ${productId}`)
-    // Aquí iría la lógica para eliminar del carrito
+    //lógica para eliminar del carrito
   }
 
   const handleCheckout = () => {
-    router.push('/checkout') // Asegúrate de tener esta ruta creada
+    router.push('/checkout') 
   }
 
   const totalCartPrice = cartItems.reduce((sum, item) => sum + item.product.price * item.qty, 0)
