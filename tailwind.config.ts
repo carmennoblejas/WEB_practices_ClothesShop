@@ -10,36 +10,36 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Modo claro (Light)
+        
         primary: {
-          DEFAULT: '#2C2C2C',    // Negro suave para botones principales
-          hover: '#1A1A1A',       // Negro más oscuro al hover
-          light: '#454545',       // Variante más clara
+          DEFAULT: '#2C2C2C',    
+          hover: '#1A1A1A',      
+          light: '#454545',      
         },
         secondary: {
-          DEFAULT: '#8B7355',     // Marrón cuero elegante
-          hover: '#6F5C45',       // Marrón más oscuro
-          light: '#A68968',       // Marrón claro
+          DEFAULT: '#8B7355',    
+          hover: '#6F5C45',      
+          light: '#A68968',      
         },
         accent: {
-          DEFAULT: '#D4AF37',     // Dorado sutil (toques de lujo)
-          hover: '#B8960F',       // Dorado más intenso
+          DEFAULT: '#D4AF37',     
+          hover: '#B8960F',       
         },
         background: {
-          DEFAULT: '#FAFAFA',     // Blanco hueso (light mode)
-          secondary: '#F5F5F5',   // Gris muy claro para cards
-          dark: '#0F0F0F',        // Negro profundo (dark mode)
-          'dark-secondary': '#1A1A1A', // Gris oscuro para cards (dark)
+          DEFAULT: '#FAFAFA',     
+          secondary: '#F5F5F5',   
+          dark: '#0F0F0F',        
+          'dark-secondary': '#1A1A1A', 
         },
         text: {
-          main: '#1A1A1A',        // Texto principal (light)
-          muted: '#6B6B6B',       // Texto secundario (light)
-          'dark-main': '#F5F5F5', // Texto principal (dark)
-          'dark-muted': '#A3A3A3',// Texto secundario (dark)
+          main: '#1A1A1A',        
+          muted: '#6B6B6B',       
+          'dark-main': '#F5F5F5', 
+          'dark-muted': '#A3A3A3',
         },
         border: {
-          light: '#E5E5E5',       // Bordes suaves (light)
-          dark: '#2C2C2C',        // Bordes discretos (dark)
+          light: '#E5E5E5',       
+          dark: '#2C2C2C',        
         },
       },
     },
