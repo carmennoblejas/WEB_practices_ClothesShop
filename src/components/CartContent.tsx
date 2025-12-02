@@ -37,7 +37,6 @@ export default function CartContent({ cartItems }: { cartItems: CartItem[] }) {
             key={product._id.toString()}
             className="flex items-center justify-between gap-6 bg-background-secondary dark:bg-background-dark-secondary p-4 rounded-lg shadow-md hover:bg-background dark:hover:bg-background-dark border border-border-light dark:border-border-dark transition"
           >
-            {/* Imagen */}
             <div className="relative w-32 h-20 flex-shrink-0 overflow-hidden rounded-md bg-background dark:bg-background-dark">
               <Image
                 src={product.img}
@@ -49,7 +48,6 @@ export default function CartContent({ cartItems }: { cartItems: CartItem[] }) {
               />
             </div>
 
-            {/* Info */}
             <div className="flex-1 min-w-0">
               <Link
                 href={`/products/${product._id}`}
@@ -60,18 +58,15 @@ export default function CartContent({ cartItems }: { cartItems: CartItem[] }) {
               <p className="text-sm text-text-muted dark:text-text-dark-muted mt-1">Per unit: {unitPrice} €</p>
             </div>
 
-            {/* Precio total */}
             <div className="text-right">
               <p className="text-accent dark:text-accent font-semibold text-lg">{totalPrice} €</p>
             </div>
 
-            {/* Controles */}
             <div className="flex items-center gap-2">
               <button className="px-2 py-1 rounded bg-background dark:bg-background-dark text-text-main dark:text-text-dark-main hover:bg-background-secondary dark:hover:bg-background-dark-secondary border border-border-light dark:border-border-dark transition">-</button>
               <span className="px-2 text-text-main dark:text-text-dark-main">{qty}</span>
               <button className="px-2 py-1 rounded bg-background dark:bg-background-dark text-text-main dark:text-text-dark-main hover:bg-background-secondary dark:hover:bg-background-dark-secondary border border-border-light dark:border-border-dark transition">+</button>
 
-              {/* Trash button */}
               <button
                 type="button"
                 onClick={() => handleDelete(product._id.toString())}
@@ -84,14 +79,12 @@ export default function CartContent({ cartItems }: { cartItems: CartItem[] }) {
         )
       })}
 
-      {/* Total row */}
       <div className="flex items-center justify-between gap-6 bg-background-secondary dark:bg-background-dark-secondary p-4 rounded-lg shadow-md border border-border-light dark:border-border-dark">
         <p className="text-text-main dark:text-text-dark-main text-lg font-bold text-right ml-auto">
           Total: <span className="ml-16 text-accent">{totalCartPrice.toFixed(2)} €</span>
         </p>
       </div>
 
-      {/* Checkout button */}
       <div className="pt-4 text-center">
         <button
           type="button"

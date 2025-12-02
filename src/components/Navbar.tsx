@@ -15,7 +15,7 @@ export default async function Navbar() {
     <nav className='fixed top-0 z-50 w-full bg-background dark:bg-background-dark bg-opacity-95 dark:bg-opacity-95 shadow-lg backdrop-blur-lg border-b border-border-light dark:border-border-dark'>
       <div className='mx-auto max-w-7xl px-6 sm:px-8 lg:px-10'>
         <div className='flex h-16 items-center justify-between'>
-          {/* Logo + title */}
+          
           <div className='flex items-center space-x-3'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -36,7 +36,6 @@ export default async function Navbar() {
             </Link>
           </div>
 
-          {/* Botones */}
           <div className='flex items-center space-x-4'>
             <ThemeSwitcher />
 

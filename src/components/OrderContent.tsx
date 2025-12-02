@@ -14,7 +14,6 @@ export default function OrderContent({ order }: { order: Order }) {
     <section className="max-w-6xl mx-auto px-6 py-12 text-text-main dark:text-text-dark-main">
       <h1 className="text-3xl font-serif font-bold mb-8 text-center">Order Details</h1>
 
-      {/* Order Info */}
       <div className="bg-background-secondary dark:bg-background-dark-secondary p-6 rounded-lg shadow-lg mb-12 space-y-4 border border-border-light dark:border-border-dark">
         <h2 className="text-2xl font-bold text-text-main dark:text-text-dark-main mb-4">Order Info</h2>
 
@@ -43,7 +42,7 @@ export default function OrderContent({ order }: { order: Order }) {
         </div>
       </div>
 
-      {/* Products Table */}
+      
       <div className="bg-background-secondary dark:bg-background-dark-secondary p-6 rounded-lg shadow-lg border border-border-light dark:border-border-dark">
         <h2 className="text-2xl font-bold text-text-main dark:text-text-dark-main mb-4">Products</h2>
 
@@ -90,7 +89,6 @@ export default function OrderContent({ order }: { order: Order }) {
                 )
               })}
 
-              {/* Total row */}
               <tr className="border-t border-border-light dark:border-border-dark">
                 <td colSpan={3} className="px-4 py-4 text-right font-bold text-secondary dark:text-accent">
                   Total

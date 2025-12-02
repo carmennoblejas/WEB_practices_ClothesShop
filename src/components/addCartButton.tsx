@@ -3,7 +3,7 @@
 interface AddToCartButtonProps {
   productId: string;
   userId: string;
-  quantity: number; // Cantidad obtenida del estado compartido
+  quantity: number; //cantidad obtenida del estado compartido
 }
 
 export default function AddToCartButton({ productId, userId, quantity }: AddToCartButtonProps) {
@@ -16,7 +16,7 @@ export default function AddToCartButton({ productId, userId, quantity }: AddToCa
         },
         body: JSON.stringify({
           productId,
-          qty: quantity, // Usamos la cantidad proporcionada por la prop
+          qty: quantity, //usamos la cantidad proporcionada por la prop
         }),
       });
 

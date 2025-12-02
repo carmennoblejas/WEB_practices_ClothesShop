@@ -37,7 +37,6 @@ export default function CheckOutForm({
     <section className="max-w-5xl mx-auto px-6 py-12 text-text-main dark:text-text-dark-main space-y-10">
       <h1 className="text-3xl font-bold font-serif mb-6">Checkout</h1>
 
-      {/* Tabla de productos */}
       <div className="bg-background-secondary dark:bg-background-dark-secondary rounded-lg shadow-lg overflow-x-auto border border-border-light dark:border-border-dark">
         <table className="min-w-full table-auto text-left text-sm">
           <thead>
@@ -75,7 +74,6 @@ export default function CheckOutForm({
         </table>
       </div>
 
-      {/* Formulario de pago */}
       <div className="bg-background-secondary dark:bg-background-dark-secondary p-6 rounded-lg shadow-lg space-y-4 border border-border-light dark:border-border-dark">
         <div>
           <label className="block mb-1 text-sm font-semibold text-text-muted dark:text-text-dark-muted">

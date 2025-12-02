@@ -50,7 +50,6 @@ export default function CartItemCounter({ userId, productId, value }: CartItemCo
 
   return (
     <div className="w-full h-11 flex items-center justify-between rounded-lg bg-background-secondary dark:bg-background-dark-secondary border border-border-light dark:border-border-dark">
-      {/* Botón decrementar */}
       <button
         type="button"
         onClick={handleDecrement}
@@ -74,7 +73,6 @@ export default function CartItemCounter({ userId, productId, value }: CartItemCo
         </svg>
       </button>
 
-      {/* Campo de entrada de cantidad */}
       <input
         type="number"
         id="quantity-input"
@@ -88,7 +86,6 @@ export default function CartItemCounter({ userId, productId, value }: CartItemCo
         style={{ appearance: 'textfield' }}
       />
 
-      {/* Botón incrementar */}
       <button
         type="button"
         onClick={handleIncrement}
