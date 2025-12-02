@@ -1,5 +1,6 @@
 import { Product } from '@/models/Product'
 import { Types } from 'mongoose'
+import Image from 'next/image'
 import Link from 'next/link'
 
 interface ProductTileProps {
@@ -14,9 +15,10 @@ export default function ProductTile({ product }: ProductTileProps) {
     >
       {/* Imagen del producto */}
       <div className='relative aspect-[4/5] w-full overflow-hidden rounded-t-lg'>
-        <img
+        <Image
           src={product.img}
           alt={product.name}
+          fill
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
       </div>
