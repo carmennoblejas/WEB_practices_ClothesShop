@@ -1,15 +1,22 @@
 import { Types } from 'mongoose'
+import { useState } from 'react';
 import { notFound } from 'next/navigation'
 import { getProduct } from '@/lib/handlers'
 import { getSession } from '@/lib/auth';
 import Image from 'next/image'
-import RemoveAllButton from '@/components/RemoveAllButton' // ✅ Nuevo botón
+import RemoveAllButton from '@/components/RemoveAllButton' 
+import CartItemCounter from '@/components/CartItemCounter'
+import AddToCartButton from '@/components/addCartButton'
+
+
+
 
 export default async function Product({
   params,
 }: {
   params: { productId: string }
 }) {
+
   if (!Types.ObjectId.isValid(params.productId)) {
     notFound()
   }
@@ -19,13 +26,11 @@ export default async function Product({
     notFound()
   }
 
- 
+
+
 const session = await getSession()
- const isLoggedIn = !!session;
-
-
-  // 🔁 Aquí deberías obtener el userId (de sesión o contexto)
-  const userId = session?.userId // <-- ⚠️ Actualiza esto
+const isLoggedIn = !!session
+const userId = session?.userId 
 
   return (
     <section className="max-w-6xl mx-auto px-6 py-16">
@@ -59,26 +64,24 @@ const session = await getSession()
 
           {/* Controles visuales */}
           <div className="flex items-center gap-4 pt-4">
-            <button className="bg-background-secondary dark:bg-background-dark-secondary text-text-main dark:text-text-dark-main border border-border-light dark:border-border-dark px-3 py-1 rounded text-lg hover:bg-background dark:hover:bg-background-dark transition">
-              -
-            </button>
-            <span className="text-text-main dark:text-text-dark-main text-lg font-medium">
-              1
-            </span>
-            <button className="bg-background-secondary dark:bg-background-dark-secondary text-text-main dark:text-text-dark-main border border-border-light dark:border-border-dark px-3 py-1 rounded text-lg hover:bg-background dark:hover:bg-background-dark transition">
-              +
-            </button>
+              <CartItemCounter
+                userId={userId}
+                productId={product._id.toString()}
+                value={1}
+              />
 
             {/* 🗑️ Botón de eliminar todo */}
             <RemoveAllButton
-              userId={userId}
+              userId={session?.userId}
               productId={product._id.toString()}
             />
           </div>
-
-          <button className="mt-6 bg-primary hover:bg-primary-hover text-white dark:text-text-dark-main px-6 py-3 rounded font-semibold shadow-md transition">
-            Añadir al carrito
-          </button>
+            <AddToCartButton
+              userId={userId}
+              productId={product._id.toString()}
+              quantity={1}
+            />
+            
         </div>
       </div>
     </section>

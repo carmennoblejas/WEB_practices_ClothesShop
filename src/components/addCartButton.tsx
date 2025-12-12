@@ -3,20 +3,20 @@
 interface AddToCartButtonProps {
   productId: string;
   userId: string;
-  quantity: number; //cantidad obtenida del estado compartido
+  quantity: number; 
 }
 
 export default function AddToCartButton({ productId, userId, quantity }: AddToCartButtonProps) {
   const handleAddToCart = async () => {
     try {
-      const response = await fetch(`/api/users/${userId}/cart`, {
-        method: 'POST',
+      const response = await fetch(`/api/users/${userId}/cart/${productId}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           productId,
-          qty: quantity, //usamos la cantidad proporcionada por la prop
+          qty: quantity, 
         }),
       });
 
@@ -32,10 +32,10 @@ export default function AddToCartButton({ productId, userId, quantity }: AddToCa
 
   return (
     <button
-      onClick={handleAddToCart}
-      className="mt-4 w-full bg-primary hover:bg-primary-hover text-white dark:text-text-dark-main font-bold py-3 rounded-lg dark:bg-primary-light dark:hover:bg-primary transition duration-300"
+    onClick={handleAddToCart}
+    className="mt-4 w-1/2 mx-auto bg-primary hover:bg-primary-hover text-white dark:text-text-dark-main font-bold py-3 rounded-lg dark:bg-primary-light dark:hover:bg-primary transition duration-300"
     >
-      Add to Cart
+    Add to Cart
     </button>
   );
 }

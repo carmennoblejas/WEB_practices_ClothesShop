@@ -1,40 +1,44 @@
-'use client'
+'use client';
 
-import { useRouter } from 'next/navigation'
-import { TrashIcon } from '@heroicons/react/24/outline'
+import { TrashIcon } from '@heroicons/react/24/outline';
+import { useRouter } from 'next/navigation';
 
-export default function RemoveAllButton({
-  userId,
-  productId,
-}: {
-  userId: string
-  productId: string
-}) {
-  const router = useRouter()
+interface RemoveAllButton {
+  userId: string;
+  productId: string;
+  onDeleteSuccess?: () => void;
+}
 
-  const handleRemoveAll = async () => {
+export default function RemoveAllButton({ userId, productId, onDeleteSuccess }: RemoveAllButton) {
+  const router = useRouter();
+
+  const handleDelete = async () => {
     try {
-      const res = await fetch(`/api/users/${userId}/cart/${productId}`, {
+      const response = await fetch(`/api/users/${userId}/cart/${productId}`, {
         method: 'DELETE',
-      })
+      });
 
-      if (res.ok) {
-        router.refresh()
+      if (response.ok) {
+        alert('Product removed from cart successfully!');
+        onDeleteSuccess?.();
+        router.refresh();
       } else {
-        console.error('Failed to remove all items')
+        const data = await response.json();
+        alert(`Failed to remove product: ${data.message}`);
       }
     } catch (error) {
-      console.error('Network error:', error)
+      console.error('Error deleting product from cart:', error);
+      alert('Something went wrong. Please try again.');
     }
-  }
+  };
 
   return (
     <button
-      onClick={handleRemoveAll}
-      className="p-2 rounded hover:bg-red-100 dark:hover:bg-red-800 transition"
-      aria-label="Remove all from cart"
+      onClick={handleDelete}
+      title="Remove from cart"
+      className="p-2 rounded-full hover:bg-red-100 dark:hover:bg-red-900 transition-colors"
     >
-      <TrashIcon className="h-5 w-5 text-red-500" />
+      <TrashIcon className="h-5 w-5 text-red-600 dark:text-red-400" />
     </button>
-  )
+  );
 }
