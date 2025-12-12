@@ -41,8 +41,8 @@ export default function SignUpForm() {
       const data = await res.json()
 
       if (res.ok) {
-        setError('')
-        router.push('/')
+        setError('User not created')
+        router.push('/auth/signin')
         router.refresh()
       } else {
         if (data?.error === 'SIGNUP_FAIL') {
