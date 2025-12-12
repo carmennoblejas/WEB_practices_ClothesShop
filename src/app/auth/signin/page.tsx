@@ -1,13 +1,13 @@
 'use client'
 
-import SignUpForm from '@/components/SignInForm'
+import SignInForm from '@/components/SignInForm'
 import Link from 'next/link'
 
 export default function SignIn() {
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center bg-black px-6 py-12 text-yellow-300">
+    <div className="flex min-h-screen w-full flex-col items-center justify-center bg-white dark:bg-black px-6 py-12 text-gray-800 dark:text-yellow-300">
       <div className="w-full max-w-sm">
-        {/* LOGO - MISMO QUE EN NAVBAR */}
+        {/* Logo */}
         <div className="flex items-center justify-center space-x-3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -25,23 +25,22 @@ export default function SignIn() {
           </svg>
           <Link
             href="/"
-            className="text-2xl font-bold tracking-wide text-gray-300 hover:text-gray-400 transition"
+            className="text-2xl font-bold tracking-wide text-gray-800 dark:text-gray-300 hover:text-yellow-400 transition"
           >
             ESSENZA
           </Link>
         </div>
 
-        <h2 className="mt-10 text-center text-3xl font-extrabold tracking-tight text-yellow-300">
-          Create a new account
+        <h2 className="mt-10 text-center text-3xl font-extrabold tracking-tight text-gray-800 dark:text-yellow-300">
+          Sign in to your account
         </h2>
-        <p className="mt-2 text-center text-sm text-gray-500">
-          and start collecting your dream bags
+        <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
+          to access your wishlist and orders
         </p>
       </div>
 
       <div className="mt-10 w-full max-w-sm">
-        <SignUpForm />
-
+        <SignInForm />
       </div>
     </div>
   )

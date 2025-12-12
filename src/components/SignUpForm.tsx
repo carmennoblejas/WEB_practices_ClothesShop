@@ -6,115 +6,185 @@ import { useRouter } from 'next/navigation'
 interface FormValues {
   email: string
   password: string
+  name: string
+  surname: string
+  birthdate: string
+  address: string // ✅ nuevo campo
 }
 
 export default function SignUpForm() {
   const router = useRouter()
   const [error, setError] = useState<string>('')
+
   const [formValues, setFormValues] = useState<FormValues>({
     email: '',
     password: '',
+    name: '',
+    surname: '',
+    birthdate: '',
+    address: '', // ✅ inicializar campo
   })
 
-  const handleSubmit = async function (
-    event: React.FormEvent<HTMLFormElement>
-  ) {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (!event.currentTarget.checkValidity()) return false
+    if (!event.currentTarget.checkValidity()) return
 
-    const res = await fetch('/api/auth/signin', {
-      method: 'POST',
-      body: JSON.stringify({ ...formValues }),
-    })
+    try {
+      const res = await fetch('/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formValues),
+      })
 
-    if (res.ok) {
-      setError('')
-      router.push('/')
-      router.refresh()
-    } else {
       const data = await res.json()
-      if (data.error === 'WRONG_CREDENTIALS') {
-        setError('Wrong e-mail or password.')
+
+      if (res.ok) {
+        setError('')
+        router.push('/')
+        router.refresh()
       } else {
-        setError(
-          'An error occurred while processing your request. Please try again later.'
-        )
+        if (data?.error === 'SIGNUP_FAIL') {
+          setError(data.message || 'E-mail already exists.')
+        } else {
+          setError('Unexpected error. Please try again.')
+        }
       }
+    } catch (err) {
+      console.error('Signup error:', err)
+      setError('Network error. Please try again.')
     }
   }
 
   return (
     <form className='group space-y-6' onSubmit={handleSubmit} noValidate>
+      {/* Name */}
+      <div>
+        <label htmlFor='name' className='block text-sm font-medium leading-6 text-gray-700 dark:text-gray-300'>
+          Name
+        </label>
+        <input
+          id='name'
+          name='name'
+          type='text'
+          placeholder='John'
+          required
+          className='peer mt-2 block w-full rounded-md border-0 bg-white dark:bg-zinc-800 px-1.5 py-2 text-gray-900 dark:text-white'
+          value={formValues.name}
+          onChange={(e) =>
+            setFormValues((prev) => ({ ...prev, name: e.target.value }))
+          }
+        />
+      </div>
+
+      {/* Surname */}
+      <div>
+        <label htmlFor='surname' className='block text-sm font-medium leading-6 text-gray-700 dark:text-gray-300'>
+          Surname
+        </label>
+        <input
+          id='surname'
+          name='surname'
+          type='text'
+          placeholder='Doe'
+          required
+          className='peer mt-2 block w-full rounded-md border-0 bg-white dark:bg-zinc-800 px-1.5 py-2 text-gray-900 dark:text-white'
+          value={formValues.surname}
+          onChange={(e) =>
+            setFormValues((prev) => ({ ...prev, surname: e.target.value }))
+          }
+        />
+      </div>
+
+      {/* Birthdate */}
+      <div>
+        <label htmlFor='birthdate' className='block text-sm font-medium leading-6 text-gray-700 dark:text-gray-300'>
+          Birthdate
+        </label>
+        <input
+          id='birthdate'
+          name='birthdate'
+          type='date'
+          required
+          className='peer mt-2 block w-full rounded-md border-0 bg-white dark:bg-zinc-800 px-1.5 py-2 text-gray-900 dark:text-white'
+          value={formValues.birthdate}
+          onChange={(e) =>
+            setFormValues((prev) => ({ ...prev, birthdate: e.target.value }))
+          }
+        />
+      </div>
+
+      {/* Address */}
+      <div>
+        <label htmlFor='address' className='block text-sm font-medium leading-6 text-gray-700 dark:text-gray-300'>
+          Address
+        </label>
+        <input
+          id='address'
+          name='address'
+          type='text'
+          placeholder='123 Main St, City, Country'
+          required
+          className='peer mt-2 block w-full rounded-md border-0 bg-white dark:bg-zinc-800 px-1.5 py-2 text-gray-900 dark:text-white'
+          value={formValues.address}
+          onChange={(e) =>
+            setFormValues((prev) => ({ ...prev, address: e.target.value }))
+          }
+        />
+      </div>
+
       {/* Email */}
       <div>
-        <label
-          htmlFor='email'
-          className='block text-sm font-medium leading-6 text-gray-700 dark:text-gray-300'
-        >
+        <label htmlFor='email' className='block text-sm font-medium leading-6 text-gray-700 dark:text-gray-300'>
           E-mail address
         </label>
         <input
           id='email'
           name='email'
           type='email'
+          required
           autoComplete='email'
           placeholder='johndoe@example.com'
-          required
-          className='peer mt-2 block w-full rounded-md border-0 bg-white dark:bg-zinc-800 px-1.5 py-2 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 invalid:[&:not(:placeholder-shown):not(:focus)]:ring-red-500'
+          className='peer mt-2 block w-full rounded-md border-0 bg-white dark:bg-zinc-800 px-1.5 py-2 text-gray-900 dark:text-white'
           value={formValues.email}
           onChange={(e) =>
             setFormValues((prev) => ({ ...prev, email: e.target.value }))
           }
         />
-        <p className='mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block'>
-          Please provide a valid email address.
-        </p>
       </div>
 
       {/* Password */}
       <div>
-        <label
-          htmlFor='password'
-          className='block text-sm font-medium leading-6 text-gray-700 dark:text-gray-300'
-        >
+        <label htmlFor='password' className='block text-sm font-medium leading-6 text-gray-700 dark:text-gray-300'>
           Password
         </label>
         <input
           id='password'
           name='password'
           type='password'
-          autoComplete='current-password'
-          placeholder=' '
           required
-          className='peer mt-2 block w-full rounded-md border-0 bg-white dark:bg-zinc-800 px-1.5 py-2 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 invalid:[&:not(:placeholder-shown):not(:focus)]:ring-red-500'
+          placeholder='********'
+          className='peer mt-2 block w-full rounded-md border-0 bg-white dark:bg-zinc-800 px-1.5 py-2 text-gray-900 dark:text-white'
           value={formValues.password}
           onChange={(e) =>
             setFormValues((prev) => ({ ...prev, password: e.target.value }))
           }
         />
-        <p className='mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block'>
-          Please input your password.
-        </p>
       </div>
 
-      {/* Error message */}
+      {/* Error */}
       {error && (
-        <div>
-          <p className='mt-2 rounded-md border-0 bg-red-500 bg-opacity-30 px-3 py-1.5 text-sm text-gray-900 dark:text-white ring-1 ring-inset ring-red-500'>
-            {error}
-          </p>
-        </div>
+        <p className='mt-2 text-sm text-red-500'>{error}</p>
       )}
 
-      {/* Button */}
-      <div>
-        <button
-          type='submit'
-          className='mt-6 mx-auto block bg-neutral-800 hover:bg-neutral-700 text-white dark:bg-gray-400 dark:hover:bg-gray-500 dark:text-black px-6 py-3 rounded font-semibold shadow-md transition'
-        >
-          Sign up
-        </button>
-      </div>
+      {/* Submit */}
+      <button
+        type='submit'
+        className='mt-6 w-full bg-neutral-800 hover:bg-neutral-700 text-white dark:bg-gray-400 dark:hover:bg-gray-500 dark:text-black px-6 py-3 rounded font-semibold shadow-md transition'
+      >
+        Sign up
+      </button>
     </form>
   )
 }

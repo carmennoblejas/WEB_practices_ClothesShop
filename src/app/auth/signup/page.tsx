@@ -47,7 +47,7 @@ export default function SignUp() {
             href="/auth/signin"
             className="font-semibold text-neutral-400 dark:text-yellow-400 hover:text-neutral-600 dark:hover:text-yellow-300 transition"
           >
-            Sign in hereS
+            Sign in here
           </Link>
         </p>
       </div>
