@@ -7,6 +7,8 @@ import NavbarButton from '@/components/NavbarButton'
 import Link from 'next/link'
 import { getSession } from '@/lib/auth'
 import { ThemeSwitcher } from '@/components/ThemeSwitcher'
+import NavbarSignOutButton from './NavbarSignOutButton'
+
 
 export default async function Navbar() {
   const session = await getSession()
@@ -49,10 +51,10 @@ export default async function Navbar() {
                   <span className='sr-only'>User profile</span>
                   <UserIcon className='h-6 w-6 text-text-muted dark:text-text-dark-muted hover:text-text-main dark:hover:text-text-dark-main transition' />
                 </NavbarButton>
-                <NavbarButton href='#'>
+                <NavbarSignOutButton href='Signed out'>
                   <span className='sr-only'>Sign out</span>
                   <ArrowRightStartOnRectangleIcon className='h-6 w-6 text-text-muted dark:text-text-dark-muted hover:text-text-main dark:hover:text-text-dark-main transition' />
-                </NavbarButton>
+                </NavbarSignOutButton>
               </>
             ) : (
               <>
