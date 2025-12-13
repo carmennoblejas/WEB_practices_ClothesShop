@@ -1,36 +1,30 @@
 import { Types } from 'mongoose'
-import { useState } from 'react';
 import { notFound } from 'next/navigation'
 import { getProduct } from '@/lib/handlers'
-import { getSession } from '@/lib/auth';
+import { getSession } from '@/lib/auth'
 import Image from 'next/image'
-import RemoveAllButton from '@/components/RemoveAllButton' 
-import CartItemCounter from '@/components/CartItemCounter'
-import AddToCartButton from '@/components/addCartButton'
-
-
-
+import AddToCartController from '@/components/AddToCartController' 
 
 export default async function Product({
   params,
 }: {
   params: { productId: string }
 }) {
-
+  // Validar ID
   if (!Types.ObjectId.isValid(params.productId)) {
     notFound()
   }
 
+  // Obtener producto
   const product = await getProduct(params.productId)
   if (product === null) {
     notFound()
   }
 
-
-
-const session = await getSession()
-const isLoggedIn = !!session
-const userId = session?.userId 
+  // Obtener sesión
+  const session = await getSession()
+  const isLoggedIn = !!session
+  const userId = session?.userId
 
   return (
     <section className="max-w-6xl mx-auto px-6 py-16">
@@ -62,26 +56,11 @@ const userId = session?.userId
             </p>
           )}
 
-          {/* Controles visuales */}
-          <div className="flex items-center gap-4 pt-4">
-              <CartItemCounter
-                userId={userId}
-                productId={product._id.toString()}
-                value={1}
-              />
-
-            {/* 🗑️ Botón de eliminar todo */}
-            <RemoveAllButton
-              userId={session?.userId}
-              productId={product._id.toString()}
-            />
-          </div>
-            <AddToCartButton
-              userId={userId}
-              productId={product._id.toString()}
-              quantity={1}
-            />
-            
+          {/* Controles: contador, eliminar y botón de añadir */}
+          <AddToCartController
+            userId={userId}
+            productId={product._id.toString()}
+          />
         </div>
       </div>
     </section>
