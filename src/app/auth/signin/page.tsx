@@ -38,10 +38,20 @@ export default function SignIn() {
           to access your wishlist and orders
         </p>
       </div>
-
+     
       <div className="mt-10 w-full max-w-sm">
         <SignInForm />
       </div>
+     <div className="mt-6 text-sm font-medium text-gray-700 dark:text-gray-300">
+  <span className="mr-1">You don't have an account yet?</span>
+  <Link
+    href="/auth/signup"
+    className="font-semibold text-neutral-400 dark:text-yellow-400 hover:text-neutral-600 dark:hover:text-yellow-300 transition"
+  >
+    Sign up in here
+  </Link>
+</div>
+
     </div>
   )
 }
