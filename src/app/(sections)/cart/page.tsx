@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation'
 import { getUserCart, getUser } from '@/lib/handlers'
 import { getSession } from '@/lib/auth'
 import CartContent from '@/components/CartContent'
+import { userInfo } from 'os'
 
 export default async function Cart() {
   const session = await getSession()
@@ -18,7 +19,7 @@ export default async function Cart() {
 
   const plainCart = JSON.parse(JSON.stringify(cart.cartItems))
   if (cart.cartItems.length != 0){
-    return <CartContent cartItems={plainCart} />
+    return <CartContent cartItems={plainCart} userId= {session.userId} />
   }
   return (
     <div className="flex items-center justify-center gap-6 bg-background-secondary dark:bg-background-dark-secondary p-8 rounded-lg shadow-md border border-border-light dark:border-border-dark">
