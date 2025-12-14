@@ -8,7 +8,7 @@ import { useState } from 'react'
 import RemoveAllButton from './RemoveAllButton'
 
 interface CartItem {
-  product: Product
+  product: Product & { _id: string }
   qty: number
 }
 
