@@ -1,9 +1,14 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { ArrowRightStartOnRectangleIcon } from '@heroicons/react/24/outline';
+import { ReactNode } from 'react';
 
-export default function NavbarSignOutButton() {
+interface NavbarSignOutButtonProps {
+  children: ReactNode;
+  href?: string; // Lo definimos opcional para que no de error en Navbar.tsx
+}
+
+export default function NavbarSignOutButton({ children }: NavbarSignOutButtonProps) {
   const router = useRouter();
 
   async function handleSignOut() {
@@ -14,6 +19,7 @@ export default function NavbarSignOutButton() {
 
       if (res.ok) {
         router.push('/auth/signin'); 
+        router.refresh();
       } else {
         console.error('Sign-out failed');
       }
@@ -26,10 +32,11 @@ export default function NavbarSignOutButton() {
     <button
       type="button"
       onClick={handleSignOut}
-      className="rounded-full p-2 text-gray-400 hover:text-gray-900 focus:text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-400 dark:text-gray-300 dark:hover:text-white dark:focus:text-white dark:focus:ring-gray-300"
+      // He actualizado las clases para usar tu paleta (text-muted, secondary, accent)
+      // en lugar de los gray-400 hardcodeados
+      className="rounded-full p-2 text-text-muted dark:text-text-dark-muted hover:text-text-main dark:hover:text-text-dark-main focus:text-text-main dark:focus:text-text-dark-main focus:outline-none focus:ring-2 focus:ring-secondary dark:focus:ring-accent transition"
     >
-      <span className="sr-only">Sign out</span>
-      <ArrowRightStartOnRectangleIcon className="h-6 w-6" aria-hidden="true" />
+      {children}
     </button>
   );
 }
