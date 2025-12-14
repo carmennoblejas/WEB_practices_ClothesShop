@@ -2,13 +2,15 @@
 
 import { Product } from '@/models/Product'
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 interface CartItem {
-  product: Product
+  product: Product & { _id: string }
   qty: number
 }
 
 interface UserData {
+  _id: string
   name: string
   surname: string
   address: string
@@ -21,16 +23,54 @@ export default function CheckOutForm({
   cartItems: CartItem[]
   user: UserData
 }) {
+  const router = useRouter()
   const [address, setAddress] = useState(user.address || '')
   const [cardHolder, setCardHolder] = useState(`${user.name} ${user.surname}`)
   const [cardNumber, setCardNumber] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false) 
 
   const total = cartItems.reduce((sum, item) => sum + item.product.price * item.qty, 0)
 
-  const handlePurchase = () => {
-    console.log('Procesando compra...')
-    console.log({ address, cardHolder, cardNumber })
-    // llamar a api para guardar pedido
+  const handlePurchase = async () => {
+    if (!address || !cardHolder || !cardNumber) {
+      alert('Please fill in all fields')
+      return
+    }
+    const cardNumberRegex = /^\d{16}$/
+    if (!cardNumberRegex.test(cardNumber)) {
+      alert('Invalid card number. Must be 16 digits.')
+      return
+    }
+    setIsSubmitting(true)
+    
+    try {
+      
+      const response = await fetch(`/api/users/${user._id}/orders`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          address,
+          cardHolder,
+          cardNumber,
+        }),
+      })
+
+      if (response.ok) {
+        alert('Order placed successfully!')
+        router.push('/profile') 
+        router.refresh()
+      } else {
+        const data = await response.json()
+        alert(data.message || 'Failed to place order')
+      }
+    } catch (error) {
+      console.error('Error:', error)
+      alert('An error occurred while processing your order')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -112,9 +152,11 @@ export default function CheckOutForm({
         <div className="pt-4 text-center">
           <button
             onClick={handlePurchase}
+            disabled={isSubmitting}
             className="bg-primary hover:bg-primary-hover text-white dark:text-text-dark-main font-semibold px-6 py-3 rounded-md shadow-md transition"
           >
             Purchase
+            {isSubmitting ? 'Processing...' : 'Purchase'}
           </button>
         </div>
       </div>
