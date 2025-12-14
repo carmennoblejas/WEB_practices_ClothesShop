@@ -32,8 +32,6 @@ export default function NavbarSignOutButton({ children }: NavbarSignOutButtonPro
     <button
       type="button"
       onClick={handleSignOut}
-      // He actualizado las clases para usar tu paleta (text-muted, secondary, accent)
-      // en lugar de los gray-400 hardcodeados
       className="rounded-full p-2 text-text-muted dark:text-text-dark-muted hover:text-text-main dark:hover:text-text-dark-main focus:text-text-main dark:focus:text-text-dark-main focus:outline-none focus:ring-2 focus:ring-secondary dark:focus:ring-accent transition"
     >
       {children}

@@ -6,7 +6,7 @@ export default function Footer() {
       <hr className='border-border-light dark:border-border-dark' />
       <div className='flex items-center justify-center gap-4 pt-6'>
         <span className='text-center text-xs font-light text-text-muted dark:text-text-dark-muted'>
-          Web Engineering and Services - &copy;&nbsp;BagShop
+          ESSENZA - &copy;&nbsp;BagShop
         </span>
       </div>
     </footer>

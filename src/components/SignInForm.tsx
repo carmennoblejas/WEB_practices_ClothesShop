@@ -41,7 +41,7 @@ export default function SignInForm() {
 
   return (
     <form className="group space-y-6" onSubmit={handleSubmit} noValidate>
-      {/* Email */}
+    
       <div>
         <label
           htmlFor="email"
@@ -67,7 +67,7 @@ export default function SignInForm() {
         </p>
       </div>
 
-      {/* Password */}
+     
       <div>
         <label
           htmlFor="password"
@@ -93,7 +93,7 @@ export default function SignInForm() {
         </p>
       </div>
 
-      {/* Error message */}
+      
       {error && (
         <div>
           <p className="mt-2 rounded-md border-0 bg-red-500 bg-opacity-30 px-3 py-1.5 text-sm text-gray-900 dark:text-white ring-1 ring-inset ring-red-500">
@@ -102,7 +102,7 @@ export default function SignInForm() {
         </div>
       )}
 
-      {/* Button */}
+     
       <div>
         <button
           type="submit"
