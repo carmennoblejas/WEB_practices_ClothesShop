@@ -1,5 +1,7 @@
 'use client';
 
+import { useRouter } from 'next/navigation'
+
 interface AddToCartButtonProps {
   productId: string;
   userId: string;
@@ -7,6 +9,7 @@ interface AddToCartButtonProps {
 }
 
 export default function AddToCartButton({ productId, userId, quantity }: AddToCartButtonProps) {
+  const router = useRouter()
   const handleAddToCart = async () => {
     try {
       const response = await fetch(`/api/users/${userId}/cart/${productId}`, {
@@ -21,6 +24,7 @@ export default function AddToCartButton({ productId, userId, quantity }: AddToCa
       });
 
       if (response.ok) {
+        router.refresh();
         alert('Product added to cart successfully!');
       } else {
         alert('Failed to add product to cart.');

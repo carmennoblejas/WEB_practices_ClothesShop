@@ -36,14 +36,14 @@ export default function CartItemCounter({
   const handleIncrement = () => {
     const newValue = value + 1
     onChange?.(newValue)
-    updateCart(newValue)
+    //updateCart(newValue)
   }
 
   const handleDecrement = () => {
     if (value > 1) {
       const newValue = value - 1
       onChange?.(newValue)
-      updateCart(newValue)
+      //updateCart(newValue)
     }
   }
 
