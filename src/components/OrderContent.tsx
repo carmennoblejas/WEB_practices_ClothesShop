@@ -58,9 +58,11 @@ export default function OrderContent({ order }: { order: Order }) {
             </thead>
             <tbody>
               {order.orderItems.map((item, index) => {
-                const product = item.product
-                const productName = typeof product !== 'string' ? product.name : ''
-                const productImage = typeof product !== 'string' ? product.img : ''
+                //  Añadimos 'as unknown' antes del tipo final para que no pete
+                const product = item.product as unknown as { name: string; img: string }
+                
+                const productName = product.name || 'Unknown Product'
+                const productImage = product.img || ''
                 const unitPrice = item.price.toFixed(2)
                 const subtotal = (item.qty * item.price).toFixed(2)
 
