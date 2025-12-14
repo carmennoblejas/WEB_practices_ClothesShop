@@ -156,7 +156,7 @@ export default function CheckOutForm({
             className="bg-primary hover:bg-primary-hover text-white dark:text-text-dark-main font-semibold px-6 py-3 rounded-md shadow-md transition"
           >
             Purchase
-            {isSubmitting ? 'Processing...' : 'Purchase'}
+            {isSubmitting ? ' Processing...' : ' '}
           </button>
         </div>
       </div>
