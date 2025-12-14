@@ -33,7 +33,7 @@ export default function AddToCartController({ userId, productId }: Props) {
           userId={userId} 
           productId={productId}
           value={quantity}
-          
+          onChange={setQuantity} 
         />
         <RemoveAllButton userId={userId} productId={productId} />
       </div>
